@@ -31,7 +31,6 @@ public class BasePage {
     public Properties prop;
     private String config="src/test/resources/Properties/User.properties";
     public BasePage() {
-//        this.driver=driver;
         try{
             prop =new Properties();
             InputStream fis = new FileInputStream(config);
@@ -39,7 +38,6 @@ public class BasePage {
         }  catch (IOException e) {
             e.getMessage();
         }
-//        PageFactory.initElements(driver, this);
     }
     public void initialization() {
         String browser=prop.getProperty("Browser");
@@ -58,7 +56,6 @@ public class BasePage {
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
             }
-//        return driver;
         driver.manage().timeouts().pageLoadTimeout(Browsers.pageLoadTime);
         driver.manage().timeouts().implicitlyWait(Browsers.implicitlyWait);
         driver.manage().window().maximize();
@@ -67,13 +64,8 @@ public class BasePage {
                 pollingEvery(Duration.ofMillis(500)).
                 withTimeout(Duration.ofSeconds(30)).
                 ignoring(NoSuchElementException.class);
-//        wait = (WebDriverWait) fluentWait;
         wait=new WebDriverWait(driver,Duration.ofSeconds(30));
         driver.get(prop.getProperty("Login_URL"));
     }
-//    @AfterSuite
-//    public void teardown(){
-//        driver.quit();
-//    }
 
 }
